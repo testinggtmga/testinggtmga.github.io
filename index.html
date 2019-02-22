@@ -45,7 +45,15 @@
 
 		<h2>Youtube Video Tracking</h2>
 		<iframe width="560" height="315" enablejsapi=1 src="https://www.youtube.com/embed/eY52Zsg-KVI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe width="560" height="315" enablejsapi=1 src="https://www.youtube.com/embed/oUjU15WCkNg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+		<h2>Implementing click tags using our proposed convention... (aggregation per page)</h2>
+		The following elements represent clickable things that we track on the same page, differentiated by action, and label. They use the same TEST_PAGE_AGGREGATION tag. For the below example, ACTION and LABEL are hard-coded.
+		<ul>
+			<li><a href="" id="test-tag-aggregation-1">This is element 1</a></li>
+			<li><a href="" id="test-tag-aggregation-2">This is element 2</a></li>
+			<li><a href="" id="test-tag-aggregation-3">This is element 3</a></li>
+		</ul>
 
 		<script>
 			let previewer = document.querySelector("#datalayer-push-preview")
@@ -83,6 +91,9 @@
 					window.dataLayer.push(dL_push)
 				}
 			}
+
+			// OUR CONVENTION
+			
 
 			// HELPER FUNCTIONS
 			function updatePreviewer(new_value)	{	
