@@ -7,7 +7,7 @@
 		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 		})(window,document,'script','dataLayer','GTM-KMMH4LM');</script>
-		<!-- End Google Tag Manager -->v
+		<!-- End Google Tag Manager -->
 	</head>
 
 
@@ -17,7 +17,76 @@
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 
-		HELLO WORLD!
+		<h1>GTM TESTING AREA</h1>
+
+		<h2> dataLayer push object will appear below: </h2>
+		<pre>
+			<div style="text-align:left; margin: auto" id="datalayer-push-preview"></div>
+		</pre>
+
+		<h2>Page View (PAGE_VIEW)</h2>
+		No elements needed, triggered on page load.
+
+		<h2>On Click (CLICK_LEFT)</h2>
+
+		The following elements have an onclick that pushes a datalayer to ONE tag using a custom event trigger (actual implementation may vary): 
+
+		<ul>
+			<li><a href="#" class="test-onclick-datalayer-push">Element 1 (anchor)</a></li>
+			<li><button class="test-onclick-datalayer-push">Element 2 (button)</button></li>
+			<li><span class="test-onclick-datalayer-push">Element 3 (span)</span></li>
+		</ul>
+
+		<h2>On Type [input of >3 characters] (TYPE)</h2>
+		
+		The following textbox will send a datalayer push once more than 3 characters have been entered into the field (length of input > 3 chars)
+
+		<input type="text" id="test-type-datalayer-push" />
+
+
+		<script>
+			let previewer = document.querySelector("#datalayer-push-preview")
+			
+			// CLICK TESTING
+			let onclick_elements = document.querySelectorAll(".test-onclick-datalayer-push")
+
+			for(let i = 0; i < onclick_elements.length; i++)	{
+				let element = onclick_elements[i]
+				element.onclick = function(event)	{
+					let dL_push = {
+							'event': 'TEST_EVENT_TRIGGER_ONCLICK',
+							'ACTION': 'CLICK_LEFT',
+							'LABEL': event.target.innerHTML,
+							'VALUE': 'MAIN',
+							'EXTRA': 'XYZ'
+							}
+					updatePreviewer(dL_push)
+					window.dataLayer.push(dL_push)
+				}
+			}
+
+			// TYPE TESTING
+			let input_box = document.querySelector("#test-type-datalayer-push")
+			input_box.oninput = function(event)	{
+				if (input_box.value.length > 3)	{
+					let dL_push = {
+						'event': 'TEST_EVENT_TRIGGER_ONTYPE',
+						'ACTION': 'TYPE',
+						'LABEL': 'TEXTBOX_TEST',
+						'VALUE': input_box.value,
+						'EXTRA': 'ABC'
+					}
+					updatePreviewer(dL_push)
+					window.dataLayer.push(dL_push)
+				}
+			}
+
+			// HELPER FUNCTIONS
+			function updatePreviewer(new_value)	{	
+				previewer.innerHTML = JSON.stringify(new_value, null, 2)
+			}
+
+		</script>
 	</body>
 
 </html>
