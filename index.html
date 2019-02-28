@@ -75,17 +75,25 @@
 
 			// TYPE TESTING
 			let input_box = document.querySelector("#test-type-datalayer-push")
+			let isFilled = false
+			let dLPushed = false
 			input_box.oninput = function(event)	{
 				if (input_box.value.length > 3)	{
-					let dL_push = {
-						'event': 'TEST_EVENT_TRIGGER_ONTYPE',
-						'ACTION': 'TYPE',
-						'LABEL': 'TEXTBOX_TEST',
-						'VALUE': input_box.value,
-						'EXTRA': 'ABC'
+					if (dLPushed == false)	{
+						let dL_push = {
+							'event': 'TEST_EVENT_TRIGGER_ONTYPE',
+							'ACTION': 'TYPE',
+							'LABEL': 'TEXTBOX_TEST',
+							'VALUE': input_box.value,
+							'EXTRA': 'ABC'
+						}
+						updatePreviewer(dL_push)
+						window.dataLayer.push(dL_push)
+						dLPushed = true
 					}
-					updatePreviewer(dL_push)
-					window.dataLayer.push(dL_push)
+				} else {
+					isFilled = false
+					dLPushed = false
 				}
 			}
 
